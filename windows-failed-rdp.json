@@ -1,0 +1,59 @@
+{
+    "version": "Notebook/1.0",
+    "items": [
+        {
+            "type": 1,
+            "content": {
+                "json": "## New workbook\n---\n\nWelcome to your new workbook.  This area will display text formatted as markdown.\n\n\nWe've included a basic analytics query to get you started. Use the `Edit` button below each section to configure it or add more sections."
+            },
+            "name": "text - 2",
+            "id": "4fa2da7b-f491-46cf-89d3-d3c02140e821"
+        },
+        {
+            "id": "1b73381f-efe4-44be-be8f-43bf02694abf",
+            "type": 3,
+            "name": "query - 0",
+            "content": {
+                "version": "KqlItem/1.0",
+                "query": "let GeoIPDB_FULL = _GetWatchlist(\"geoip\");\nlet WindowsEvents = SecurityEvent;\nWindowsEvents | where EventID == 4625\n| order by TimeGenerated desc\n| evaluate ipv4_lookup(GeoIPDB_FULL, IpAddress, network)\n| project TimeGenerated, Account, AccountType, Computer, EventID, Activity, IpAddress, LogonTypeName, network, latitude, longitude, city = cityname, country = countryname, friendly_location = strcat(cityname, \" (\", countryname, \")\");\n",
+                "size": 3,
+                "timeContext": {
+                    "durationMs": 2592000000
+                },
+                "queryType": 0,
+                "resourceType": "microsoft.operationalinsights/workspaces",
+                "visualization": "map",
+                "mapSettings": {
+                    "locInfo": "LatLong",
+                    "locInfoColumn": "countryname",
+                    "latitude": "latitude",
+                    "longitude": "longitude",
+                    "sizeSettings": "EventID",
+                    "sizeAggregation": "Count",
+                    "opacity": 0.8,
+                    "labelSettings": "friendly_location",
+                    "legendMetric": "EventID",
+                    "legendAggregation": "Count",
+                    "itemColorSettings": {
+                        "nodeColorField": "EventID",
+                        "colorAggregation": "Sum",
+                        "type": "heatmap",
+                        "heatmapPalette": "greenRed"
+                    }
+                },
+                "crossComponentResources": [
+                    "/subscriptions/fe9ee672-6512-460a-a659-87c74c035ea5/resourcegroups/honeynet-rg/providers/microsoft.operationalinsights/workspaces/honeynet-law"
+                ]
+            }
+        }
+    ],
+    "isLocked": false,
+    "styleSettings": {},
+    "fromTemplateId": "sentinel-UserWorkbook",
+    "context": {
+        "ownerId": "/subscriptions/fe9ee672-6512-460a-a659-87c74c035ea5/resourceGroups/honeynet-rg/providers/Microsoft.OperationalInsights/workspaces/honeynet-law"
+    },
+    "fallbackResourceIds": [
+        "/subscriptions/fe9ee672-6512-460a-a659-87c74c035ea5/resourcegroups/honeynet-rg/providers/microsoft.operationalinsights/workspaces/honeynet-law"
+    ]
+}
