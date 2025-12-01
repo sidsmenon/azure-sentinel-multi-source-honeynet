@@ -74,7 +74,7 @@ Depending on how you onboard each source, you’ll typically see data land in ta
 
 ## Setup Guide (Step-by-Step)
 
-
+You can refer to this article that I have prepared to recreate this project: https://sidharthsmenon.medium.com/from-honeypot-to-honeynet-building-a-multi-source-azure-sentinel-lab-d20750350eff
 
 ## Security Notice / Disclaimer
 
